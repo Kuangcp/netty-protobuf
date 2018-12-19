@@ -1,4 +1,4 @@
-package com.github.kuangcp;
+package com.github.kuangcp.client;
 
 import com.google.protobuf.GeneratedMessage;
 import io.netty.bootstrap.Bootstrap;

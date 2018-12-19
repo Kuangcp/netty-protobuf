@@ -1,4 +1,4 @@
-package com.github.kuangcp;
+package com.github.kuangcp.client;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;

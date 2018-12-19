@@ -1,0 +1,40 @@
+plugins {
+  id 'java'
+  id 'maven'
+}
+
+group 'com.github.kuangcp'
+version '1.0-SNAPSHOT'
+buildDir = "out/build"
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenLocal()
+
+  def aliyun = "http://maven.aliyun.com/nexus/content/groups/public/"
+  def abroad = "http://central.maven.org/maven2/"
+  maven {
+    url = aliyun
+    artifactUrls abroad
+  }
+  maven {
+    url = "https://gitee.com/gin9/MavenRepos/raw/master"
+  }
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+  implementation 'io.netty:netty-all:4.1.5.Final'
+  implementation 'ch.qos.logback:logback-core:1.2.3'
+  implementation 'ch.qos.logback:logback-classic:1.2.3'
+  implementation 'com.google.protobuf:protobuf-java:2.5.0'
+
+  annotationProcessor 'org.projectlombok:lombok:1.18.2'
+  compileOnly 'org.projectlombok:lombok:1.18.2'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+  testCompileOnly 'org.projectlombok:lombok:1.18.2'
+
+  testImplementation group: 'junit', name: 'junit', version: '4.12'
+}

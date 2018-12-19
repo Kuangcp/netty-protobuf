@@ -1,0 +1,15 @@
+out/
+*.iml
+
+target/
+
+*.class
+
+.gradle/
+.gradletasknamecache
+
+
+logs/
+*.log
+
+test.*

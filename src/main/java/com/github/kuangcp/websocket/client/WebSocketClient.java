@@ -1,4 +1,4 @@
-package com.github.kuangcp.client;
+package com.github.kuangcp.websocket.client;
 
 import com.google.protobuf.GeneratedMessage;
 import io.netty.bootstrap.Bootstrap;

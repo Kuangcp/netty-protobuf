@@ -3,11 +3,12 @@ plugins {
   id 'maven'
 }
 
-group 'com.github.kuangcp'
-version '1.1-SNAPSHOT'
+group = 'com.github.kuangcp'
+version = '1.1-SNAPSHOT'
 buildDir = "out/build"
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
   mavenLocal()

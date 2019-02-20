@@ -44,7 +44,8 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
 
   @Override
   public void channelInactive(ChannelHandlerContext ctx) {
-    log.debug("WebSocket Client disconnected!");
+    log.error("The channel was inactive!");
+    System.exit(1);
   }
 
   @Override
@@ -53,7 +54,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
     if (!handShaker.isHandshakeComplete()) {
       try {
         handShaker.finishHandshake(ch, (FullHttpResponse) msg);
-        log.info("WebSocket Client connected!");
+        log.info("WebSocket Client was connected");
         handshakeFuture.setSuccess();
       } catch (WebSocketHandshakeException e) {
         log.error("WebSocket Client failed to connect");
@@ -64,9 +65,9 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
 
     if (msg instanceof FullHttpResponse) {
       FullHttpResponse response = (FullHttpResponse) msg;
-      throw new IllegalStateException(
-          "Unexpected FullHttpResponse (getStatus=" + response.status() +
-              ", content=" + response.content().toString(CharsetUtil.UTF_8) + ')');
+      String exceptionMsg = String.format("Unexpected FullHttpResponse (getStatus=%s,content=%s)",
+          response.status(), response.content().toString(CharsetUtil.UTF_8));
+      throw new IllegalStateException(exceptionMsg);
     }
 
     WebSocketFrame frame = (WebSocketFrame) msg;

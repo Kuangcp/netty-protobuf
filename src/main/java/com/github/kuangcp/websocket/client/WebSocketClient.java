@@ -111,8 +111,12 @@ public class WebSocketClient {
     group.shutdownGracefully();
   }
 
+  public boolean hasConnected() {
+    return Objects.nonNull(channel);
+  }
+
   public void sendMsg(GeneratedMessage.Builder msgBuilder) {
-    if (Objects.isNull(channel)) {
+    if (!hasConnected()) {
       log.error("clientId={}: channel not establish", clientId);
       return;
     }

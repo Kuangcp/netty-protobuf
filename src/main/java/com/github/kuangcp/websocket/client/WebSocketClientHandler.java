@@ -49,7 +49,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
   }
 
   @Override
-  public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
+  public void channelRead0(ChannelHandlerContext ctx, Object msg) {
     Channel ch = ctx.channel();
     if (!handShaker.isHandshakeComplete()) {
       try {
@@ -57,7 +57,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
         log.info("WebSocket Client was connected");
         handshakeFuture.setSuccess();
       } catch (WebSocketHandshakeException e) {
-        log.error("WebSocket Client failed to connect");
+        log.error("WebSocket Client failed to connect server");
         handshakeFuture.setFailure(e);
       }
       return;

@@ -45,7 +45,6 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
   @Override
   public void channelInactive(ChannelHandlerContext ctx) {
     log.error("The channel was inactive!");
-    System.exit(1);
   }
 
   @Override

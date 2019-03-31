@@ -1,0 +1,6 @@
+package com.github.kuangcp.websocket;
+
+message Chat {
+    required string name = 1;
+    required string msg = 2;
+}

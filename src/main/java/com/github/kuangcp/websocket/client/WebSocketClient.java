@@ -1,6 +1,7 @@
 package com.github.kuangcp.websocket.client;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.GeneratedMessageV3;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -116,13 +117,20 @@ public class WebSocketClient {
   }
 
   public void sendMsg(GeneratedMessage.Builder msgBuilder) {
+    sendMsg(msgBuilder.build().toByteArray());
+  }
+
+  public void sendMsg(GeneratedMessageV3.Builder msgBuilder) {
+    sendMsg(msgBuilder.build().toByteArray());
+  }
+
+  private void sendMsg(byte[] data) {
     if (!hasConnected()) {
       log.error("clientId={}: channel not establish", clientId);
       return;
     }
 
-    byte[] bytes = msgBuilder.build().toByteArray();
-    ByteBuf byteBuf = Unpooled.copiedBuffer(bytes);
+    ByteBuf byteBuf = Unpooled.copiedBuffer(data);
     BinaryWebSocketFrame frame = new BinaryWebSocketFrame(byteBuf);
     this.channel.writeAndFlush(frame);
   }

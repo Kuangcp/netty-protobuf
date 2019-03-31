@@ -1,6 +1,13 @@
+buildscript {
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+  }
+}
+
 plugins {
   id 'java'
   id 'maven'
+  id 'com.google.protobuf' version "0.8.8"
 }
 
 group = 'com.github.kuangcp'
@@ -9,6 +16,25 @@ buildDir = "out/build"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+sourceSets{
+  main{
+    proto{
+      srcDir 'src/main/resources/proto'
+    }
+    java{
+      srcDir 'out/build/generated/main'
+    }
+  }
+}
+
+protobuf {
+  generatedFilesBaseDir = "$projectDir/out/build/generated"
+  protoc {
+    //从仓库下载
+    artifact = 'com.google.protobuf:protoc:3.7.0'
+  }
+}
 
 repositories {
   mavenLocal()
@@ -28,7 +54,8 @@ repositories {
 
 dependencies {
   implementation 'io.netty:netty-all:4.1.5.Final'
-  implementation 'com.google.protobuf:protobuf-java:2.5.0'
+  implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '3.7.0'
+
 
   implementation 'ch.qos.logback:logback-core:1.2.3'
   implementation 'ch.qos.logback:logback-classic:1.2.3'
